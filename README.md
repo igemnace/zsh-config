@@ -15,7 +15,7 @@ Make sure that your machine satisfies the following:
 
 Just run `install.sh`. This will automatically do the following:
 - Symlink `.zshrc` into your home directory (`zshrc.sh`)
-- Run oh-my-zsh installation through wget, whichever exists (`oh-my-zsh.sh`)
+- Run oh-my-zsh installation through wget (`oh-my-zsh.sh`)
 
 ## Licensing
 
