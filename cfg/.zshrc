@@ -38,6 +38,7 @@ export EDITOR=vim
 # aliases
 alias ls='ls --color=auto'
 alias tl='tmux ls'
+alias tn='tmux new -s'
 alias ta='tmux a -t'
 alias tk='tmux kill-session -t'
 alias tx='tmux kill-server'
