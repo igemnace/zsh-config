@@ -26,7 +26,7 @@ source /usr/share/nvm/init-nvm.sh
 ### END NVM
 
 ### ANDROID
-export ANDROID_HOME=/opt/android-sdk
+export ANDROID_HOME="/opt/android-sdk"
 export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 ### END ANDROID
 
