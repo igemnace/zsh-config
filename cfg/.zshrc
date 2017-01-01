@@ -46,4 +46,5 @@ alias tx='tmux kill-server'
 # path
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/Documents/Misc/scripts:$PATH"
 ### END MISC CHANGES
