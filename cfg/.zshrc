@@ -21,6 +21,11 @@ POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 ### END POWERLEVEL9K
 
+### POWERLINE
+export POWERLINE_CONFIG_COMMAND="/usr/local/bin/powerline-config"
+export POWERLINE_COMMAND=powerline
+### END POWERLINE
+
 ### NVM
 source /usr/share/nvm/init-nvm.sh
 ### END NVM
