@@ -3,7 +3,7 @@
 ### END TMUX
 
 ### OH-MY-ZSH
-export ZSH=/home/ian/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 DISABLE_LS_COLORS="false"
 ENABLE_CORRECTION="true"
