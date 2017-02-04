@@ -47,6 +47,10 @@ alias tn='tmux new -s'
 alias ta='tmux a -t'
 alias tk='tmux kill-session -t'
 alias tx='tmux kill-server'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
 
 # path
 export PATH="/usr/local/heroku/bin:$PATH"
