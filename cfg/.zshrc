@@ -13,6 +13,11 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 ### END OH-MY-ZSH
 
+### BASE-16 SHELL
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+### END BASE-16 SHELL
+
 ### POWERLEVEL9K
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs background_jobs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
