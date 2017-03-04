@@ -16,6 +16,7 @@ Make sure that your machine satisfies the following:
 Just run `install.sh`. This will automatically do the following:
 - Symlink `.zshrc` into your home directory (`zshrc.sh`)
 - Run oh-my-zsh installation through wget (`oh-my-zsh.sh`)
+- Git clone base16-shell colorscheme into your home directory (`base16.sh`)
 - Git clone powerlevel9k zsh theme into oh-my-zsh directory (`powerlevel9k.sh`)
 
 ## Licensing
