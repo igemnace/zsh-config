@@ -35,6 +35,12 @@ export POWERLINE_COMMAND=powerline
 source /usr/share/nvm/init-nvm.sh
 ### END NVM
 
+### FZF
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+### END FZF
+
 ### ANDROID
 export ANDROID_HOME="/opt/android-sdk"
 export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
@@ -56,6 +62,7 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias vz='vim $(fzf)'
 
 # path
 export PATH="/usr/local/heroku/bin:$PATH"
