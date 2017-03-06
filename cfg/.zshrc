@@ -62,6 +62,7 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias v.='vim .'
 alias vz='vim $(fzf)'
 
 # path
