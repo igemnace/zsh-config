@@ -14,8 +14,11 @@ source $ZSH/oh-my-zsh.sh
 ### END OH-MY-ZSH
 
 ### BASE-16 SHELL
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# impacts startup time, so put in function and execute when needed
+enable_base16() {
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+}
 ### END BASE-16 SHELL
 
 ### POWERLEVEL9K
@@ -32,7 +35,10 @@ export POWERLINE_COMMAND=powerline
 ### END POWERLINE
 
 ### NVM
-source /usr/share/nvm/init-nvm.sh
+# impacts startup time, so put in function and execute when needed
+enable_nvm() {
+  source /usr/share/nvm/init-nvm.sh
+}
 ### END NVM
 
 ### FZF
@@ -47,6 +53,8 @@ export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 ### END ANDROID
 
 ### MISC CHANGES
+# env
+export LANG="en_US.UTF-8"
 # editor
 export VISUAL=vim
 export EDITOR=vim
