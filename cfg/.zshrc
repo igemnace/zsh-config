@@ -64,6 +64,8 @@ alias gc='git commit'
 alias gd='git diff'
 alias v.='vim .'
 alias vz='vim $(fzf)'
+alias e='emacs -nw'
+alias ez='emacs -nw $(fzf)'
 
 # path
 export PATH="/usr/local/heroku/bin:$PATH"
