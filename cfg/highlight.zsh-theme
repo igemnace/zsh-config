@@ -27,7 +27,7 @@ git_info() {
     flag=""
     [[ $staged != "" ]] && flag+="+"
     [[ $unstaged != "" ]] && flag+="!"
-    [[ $untracked == *?* ]] && flag+="?"
+    [[ $untracked == *\?* ]] && flag+="?"
     if [[ $flag == "" ]]; then
       final_flag="%F{2}[ok]%f"
     else
