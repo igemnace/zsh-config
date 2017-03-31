@@ -5,8 +5,10 @@ newline=$'\n'
 collapse_pwd() {
   if [[ $PWD == $HOME ]]; then
     echo "%F{16}%B~$f%b"
+  elif [[ $PWD == "/" ]]; then
+    echo "%F{16}%B/$f%b"
   else
-    echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{16}%B${PWD:t}%b}//\/~/\~}
+    echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{16}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
   fi
 }
 custom_prompt_context='%F{20}%n@%M%F{8}: $(collapse_pwd)%{$reset_color%}'
