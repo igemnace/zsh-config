@@ -71,7 +71,7 @@ custom_prompt_exit='$(colored_exit_code)'
 background_jobs() {
   if [[ $(jobs) != "" ]]; then
     num=$(jobs | grep -c '')
-    echo "%F{4}[bg]%{$reset_color%}"
+    echo "%F{4}bg %{$reset_color%}"
   fi
 }
 custom_prompt_jobs='$(background_jobs)'
