@@ -79,4 +79,9 @@ alias ls='ls --color=auto'
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Documents/Misc/scripts:$PATH"
+export PATH="$HOME/Documents/Misc/scripts/todotxt-helper:$PATH"
+
+# syntax highlighting
+# must be at the end of zshrc!
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ### END MISC CHANGES
