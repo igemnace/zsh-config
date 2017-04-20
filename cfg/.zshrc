@@ -32,6 +32,33 @@ enable_nvm() {
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+
+# fzf functions
+fzf_dirty_files() {
+  git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview='git diff --color=always {}'
+}
+
+fzf_commits() {
+  git log --pretty=oneline --abbrev-commit | fzf | cut -f 1 -d " "
+}
+
+fzf_music() {
+  rg --files $HOME/Music | fzf
+}
+
+fzf_apropos() {
+  apropos '' | fzf | cut -f 1 -d " "
+}
+
+fzf_alias() {
+  alias | tr = "\t" | fzf | cut -f 1
+}
+
+fzf_grep() {
+  # I use ripgrep here for speed
+  # but the same thing can be done by grep -R .
+  rg -n '' | sed -e 's/:/+/' -e 's/:/\t/' -e 's/+/:/' | fzf | cut -f 1
+}
 ### END FZF
 
 ### TODOTXT
@@ -64,16 +91,23 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias gaz='git add $(fzf_dirty_files)'
+alias gcz='git show $(fzf_commits)'
 
 # editor aliases
 alias v='vim'
 alias v.='vim .'
 alias vz='vim "$(fzf --multi)"'
+alias vgz='vim $(fzf_grep  | sed -e "s/:/ +/")'
 alias e='emacs -nw'
 alias ez='emacs -nw "$(fzf --multi)"'
 
+# cmus aliases
+alias cpz='cmus-remote -p $(fzf_music)'
+
 # misc aliases
 alias ls='ls --color=auto'
+alias manz='man $(fzf_apropos)'
 
 # path
 export PATH="/usr/local/heroku/bin:$PATH"
