@@ -35,7 +35,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 # fzf functions
 fzf_dirty_files() {
-  git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview='git diff --color=always {}'
+  git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview-window=down:50% --preview='git diff --color=always {}'
 }
 
 fzf_commits() {
@@ -47,7 +47,7 @@ fzf_music() {
 }
 
 fzf_apropos() {
-  apropos '' | fzf | cut -f 1 -d " "
+  apropos '' | fzf --preview-window=down:50% --preview 'echo {} | cut -f 1 -d " " | xargs man' | cut -f 1 -d " "
 }
 
 fzf_alias() {
