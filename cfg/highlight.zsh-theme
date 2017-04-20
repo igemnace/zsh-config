@@ -4,9 +4,9 @@ newline=$'\n'
 ### prints username, hostname, and directory
 collapse_pwd() {
   if [[ $PWD == $HOME ]]; then
-    echo "%F{16}%B~$f%b"
+    echo "%F{16}%B~%f%b"
   elif [[ $PWD == "/" ]]; then
-    echo "%F{16}%B/$f%b"
+    echo "%F{16}%B/%f%b"
   else
     echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{16}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
   fi
