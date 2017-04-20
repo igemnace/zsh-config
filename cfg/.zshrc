@@ -1,5 +1,5 @@
 ### TMUX
-[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 ### END TMUX
 
 ### OH-MY-ZSH
@@ -14,8 +14,11 @@ source $ZSH/oh-my-zsh.sh
 ### END OH-MY-ZSH
 
 ### BASE-16 SHELL
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+enable_base16_shell() {
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+}
+[[ $TMUX = ""  ]] && enable_base16_shell
 ### END BASE-16 SHELL
 
 ### NVM
