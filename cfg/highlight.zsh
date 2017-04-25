@@ -43,7 +43,7 @@ git_info() {
     if [[ $track_flag == "" ]]; then
       final_track_flag=""
     else
-      final_track_flag="%F{3}[${track_flag}]%f"
+      final_track_flag="%F{3}${track_flag}%f"
     fi
 
     ahead_flag=""
@@ -51,7 +51,7 @@ git_info() {
     if [[ $ahead_flag == "" ]]; then
       final_ahead_flag=""
     else
-      final_ahead_flag="%F{6}[+${ahead}]%f"
+      final_ahead_flag="%F{6}+${ahead}%f"
     fi
 
     behind_flag=""
@@ -59,7 +59,7 @@ git_info() {
     if [[ $behind_flag == "" ]]; then
       final_behind_flag=""
     else
-      final_behind_flag="%F{1}[-${behind}]%f"
+      final_behind_flag="%F{1}-${behind}%f"
     fi
 
     stash_flag=""
@@ -67,10 +67,18 @@ git_info() {
     if [[ $stash_flag == "" ]]; then
       final_stash_flag=""
     else
-      final_stash_flag="%F{16}[s${stashed}]%f"
+      final_stash_flag="%F{2}s%f"
     fi
 
-    echo "%F{8}git:%F{5}%B${branch}${final_track_flag}${final_stash_flag}${final_ahead_flag}${final_behind_flag}%{$reset_color%}"
+    combined_flags="${final_track_flag}${final_stash_flag}${final_ahead_flag}${final_behind_flag}"
+    if [[ $combined_flags == "" ]]; then
+      final_flags=""
+    else
+      final_flags="%F{8}[%B${combined_flags}%b%F{8}]"
+      # final_flags=$combined_flags
+    fi
+
+    echo "%F{8}git:%F{5}%B${branch}%b${final_flags}%{$reset_color%}"
   fi
 }
 custom_prompt_git='$(git_info)'
@@ -81,7 +89,7 @@ node_info() {
   if [[ -d "./node_modules" ]]; then
     node_modules_flag=""
   else
-    node_modules_flag="%F{3}%B[!]%f%b"
+    node_modules_flag="%F{8}%b[%F{3}%B!%b%F{8}]%f%b"
   fi
   if [[ -f "./package.json" ]]; then
     echo "%F{8}node:%F{1}%B$(node --version | sed -e 's/v//')%f%b$node_modules_flag"
