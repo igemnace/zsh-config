@@ -32,6 +32,7 @@ enable_nvm() {
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:5,hl+:5,prompt:8,pointer:3,marker:2'
 
 # fzf functions
 fzf_dirty_files() {
