@@ -1,6 +1,3 @@
-# enable prompt substitution
-setopt prompt_subst
-
 # cache newline in a variable
 newline=$'\n'
 

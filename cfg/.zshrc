@@ -88,6 +88,9 @@ export EDITOR=vim
 bindkey -e
 
 ### THEME
+# enable prompt substitution
+setopt prompt_subst
+
 # use my custom highlight.zsh theme
 source $HOME/.zsh/highlight.zsh
 
