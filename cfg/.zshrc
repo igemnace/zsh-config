@@ -1,60 +1,59 @@
-### TMUX
-# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
-### END TMUX
-
-### OH-MY-ZSH
-export ZSH=$HOME/.oh-my-zsh
-export LANG="en_US.UTF-8"
-ZSH_THEME="highlight"
-DISABLE_LS_COLORS="false"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-source $ZSH/oh-my-zsh.sh
-### END OH-MY-ZSH
-
 ### BASE-16 SHELL
+# define function to enable base16 helper in current shell instance
+# sourcing impacts startup time, so execute only when needed
 enable_base16_shell() {
   BASE16_SHELL=$HOME/.config/base16-shell/
   [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 }
+
+# outside tmux, colors misbehave
+# enable base16 helper automatically in such cases
 [[ $TMUX = ""  ]] && enable_base16_shell
 ### END BASE-16 SHELL
 
 ### NVM
-# impacts startup time, so put in function and execute when needed
+# define function to enable nvm in current shell instance
+# sourcing impacts startup time, so execute only when needed
 enable_nvm() {
   source /usr/share/nvm/init-nvm.sh
 }
 ### END NVM
 
 ### FZF
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+# use ripgrep instead of find to populate files
+# only used when fzf is called without piping anything into stdin
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+
+# customize colors to blend in with my own highlight.zsh theme
 export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:5,hl+:5,prompt:8,pointer:3,marker:2'
 
-# fzf functions
+### FZF FUNCTIONS
+# for unstaged changes and untracked files
 fzf_dirty_files() {
   git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview-window=up:50% --preview='git diff --color=always {}'
 }
 
+# for commits
 fzf_commits() {
   git log --pretty=oneline --abbrev-commit | fzf --preview-window=up:50% --preview 'echo {} | cut -f 1 -d " " | xargs git show --color=always' | cut -f 1 -d " "
 }
 
+# for music files in ~/Music
 fzf_music() {
   rg --files $HOME/Music | fzf
 }
 
+# for existing man pages
 fzf_apropos() {
   apropos '' | fzf --preview-window=up:50% --preview 'echo {} | cut -f 1 -d " " | xargs man' | cut -f 1 -d " "
 }
 
+# for existing aliases
 fzf_alias() {
   alias | tr = "\t" | fzf | cut -f 1
 }
 
+# for lines in all files in this directory, recursively
 fzf_grep() {
   # I use ripgrep here for speed
   # but the same thing can be done by grep -R .
@@ -63,7 +62,8 @@ fzf_grep() {
 ### END FZF
 
 ### TODOTXT
-sync_todos() {
+# define functions to sync todo.txt files to Dropbox
+upload_todos() {
   dropbox_uploader upload "$HOME/todo.txt" todo.txt
   dropbox_uploader upload "$HOME/done.txt" done.txt
   dropbox_uploader upload "$HOME/notes.md" notes.md
@@ -71,23 +71,32 @@ sync_todos() {
 ### END TODOTXT
 
 ### ANDROID
+# add ANDROID_HOME env variable, apparently used by the SDK and Gradle
 export ANDROID_HOME="/opt/android-sdk"
-export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 ### END ANDROID
 
 ### MISC CHANGES
-# editor
+### META SHELL CHANGES
+# force LANG
+export LANG="en_US.UTF-8"
+
+# use vim as primary editor
 export VISUAL=vim
 export EDITOR=vim
 
-# tmux aliases
+# force emacs key bindings
+bindkey -e
+
+
+### ALIASES
+# for tmux
 alias tl='tmux ls'
 alias tn='tmux new -s'
 alias ta='tmux a -t'
 alias tk='tmux kill-session -t'
 alias tx='tmux kill-server'
 
-# git aliases
+# for git
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
@@ -95,7 +104,7 @@ alias gd='git diff'
 alias gaz='git add $(fzf_dirty_files)'
 alias gcz='git show $(fzf_commits)'
 
-# editor aliases
+# for editors
 alias v='vim'
 alias v.='vim .'
 alias vz='vim "$(fzf --multi)"'
@@ -103,20 +112,21 @@ alias vgz='vim $(fzf_grep  | sed -e "s/:/ +/")'
 alias e='emacs -nw'
 alias ez='emacs -nw "$(fzf --multi)"'
 
-# cmus aliases
+# for cmus
 alias cpz='cmus-remote -p $(fzf_music)'
 
 # misc aliases
 alias ls='ls --color=auto'
 alias manz='man $(fzf_apropos)'
 
-# path
+### PATH
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Documents/Misc/scripts:$PATH"
 export PATH="$HOME/Documents/Misc/scripts/todotxt-helper:$PATH"
+export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
 
-# syntax highlighting
-# must be at the end of zshrc!
+### SYNTAX HIGHLIGHTING
+# must be at the end of zshrc
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ### END MISC CHANGES
