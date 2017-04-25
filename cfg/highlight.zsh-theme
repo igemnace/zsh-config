@@ -37,7 +37,7 @@ git_info() {
     [[ $unstaged != "" ]] && track_flag+="!"
     [[ $untracked == *\?* ]] && track_flag+="?"
     if [[ $track_flag == "" ]]; then
-      final_track_flag="%F{2}[ok]%f"
+      final_track_flag=""
     else
       final_track_flag="%F{3}[${track_flag}]%f"
     fi
