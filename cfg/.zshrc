@@ -91,6 +91,47 @@ bindkey -e
 # use my custom highlight.zsh theme
 source $HOME/.zsh/highlight.zsh
 
+### HISTORY
+# set up history file
+HISTFILE=$HOME/.zsh_history
+
+# append each command to the history file
+setopt inc_append_history
+
+# auto reload the history file upon modifying
+# such as when a different shell instance appends to it
+setopt share_history
+
+# load up to 5000 entries from the history file on startup
+HISTSIZE=5000
+
+# save up to 5000 entries for completion
+SAVEHIST=5000
+
+# make Up and Down cycle through history completions
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+# expand !! into the last command
+# but don't run right away so I can verify the command
+setopt histverify
+
+# expand !! inline if followed by a <Space>
+bindkey " " magic-space
+
+### COMPLETION
+# source completion config
+source $HOME/.zsh/completion.zsh
+
+# source fzf completion
+# must be done after initializing own completion
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 ### ALIASES
 # for tmux
 alias tl='tmux ls'
