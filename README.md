@@ -6,18 +6,18 @@ Easy way to transfer my zsh configuration across multiple machines.
 
 Make sure that your machine satisfies the following:
 - Is using GNU/Linux (scripts are untested on other UNIX systems and will flat-out fail on Windows)
-- Has zsh 4.3.9 or later (version required by oh-my-zsh)
+- Has zsh
 - Has no pre-existing `.zshrc` (backup and remove if existing)
-- Has env, bash, git, and wget (required by install scripts)
-- Has a working internet connection (will be downloading oh-my-zsh files)
+- Has env, bash, and git (required by install scripts)
+- Has a working internet connection (will be cloning a git repo for base16)
 
 ## Installation
 
 Just run `install.sh`. This will automatically do the following:
 - Symlink `.zshrc` into your home directory (`zshrc.sh`)
-- Run oh-my-zsh installation through wget (`oh-my-zsh.sh`)
+- Symlink completion options `completion.zsh` into `~/.zsh` (`completion.sh`)
 - Git clone base16-shell colorscheme into your home directory (`base16.sh`)
-- Git clone my "highlight" zsh theme into oh-my-zsh directory (`powerlevel9k.sh`)
+- Git clone my "highlight" zsh theme into oh-my-zsh directory (`prompt-theme.sh`)
 
 ## Licensing
 
