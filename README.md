@@ -12,6 +12,9 @@ Make sure that your machine satisfies the following:
 - Has env, bash, and git (required by install scripts)
 - Has a working internet connection (will be cloning a git repo for base16)
 
+To make use of the optional fzf integration, you must also have installed fzf.
+See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
+
 ## Installation
 
 Just run `install.sh`. This will automatically do the following:
@@ -20,9 +23,6 @@ Just run `install.sh`. This will automatically do the following:
 - Git clone base16-shell colorscheme into your home directory (`base16.sh`)
 - Git clone my "highlight" zsh theme into oh-my-zsh directory
   (`prompt-theme.sh`)
-
-To make use of the optional fzf integration, you must also have installed fzf.
-See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
 
 ## Licensing
 
