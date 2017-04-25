@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-ln -s "$PWD/cfg/highlight.zsh-theme" "$HOME/.oh-my-zsh/themes/highlight.zsh-theme"
+[[ -d $HOME/.zsh ]] && mkdir -p $HOME/.zsh
+
+ln -s "$PWD/cfg/highlight.zsh" "$HOME/.zsh/highlight.zsh"

@@ -87,6 +87,9 @@ export EDITOR=vim
 # force emacs key bindings
 bindkey -e
 
+### THEME
+# use my custom highlight.zsh theme
+source $HOME/.zsh/highlight.zsh
 
 ### ALIASES
 # for tmux

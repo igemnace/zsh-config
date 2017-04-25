@@ -1,17 +1,21 @@
+# enable prompt substitution
+setopt prompt_subst
+
+# cache newline in a variable
 newline=$'\n'
 
 ### CONTEXT
 ### prints username, hostname, and directory
 collapse_pwd() {
   if [[ $PWD == $HOME ]]; then
-    echo "%F{16}%B~%f%b"
+    echo "%F{4}%B~%f%b"
   elif [[ $PWD == "/" ]]; then
-    echo "%F{16}%B/%f%b"
+    echo "%F{4}%B/%f%b"
   else
-    echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{16}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
+    echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{4}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
   fi
 }
-custom_prompt_context='%F{20}%n@%M%F{8}: $(collapse_pwd)%{$reset_color%}'
+custom_prompt_context='%F{8}$(collapse_pwd)%{$reset_color%}'
 
 ### GIT
 ### prints git branch and status
