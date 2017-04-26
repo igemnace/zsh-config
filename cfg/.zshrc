@@ -94,6 +94,11 @@ setopt prompt_subst
 # use my custom highlight.zsh theme
 source $HOME/.zsh/highlight.zsh
 
+### LINE-EDITING
+# do not count / and . as part of a word
+# to make it easier to edit paths
+export WORDCHARS='*?_[]-~=&;!#$%^(){}<>'
+
 ### HISTORY
 # set up history file
 HISTFILE=$HOME/.zsh_history
@@ -131,7 +136,7 @@ bindkey " " magic-space
 source $HOME/.zsh/completion.zsh
 
 # source fzf completion
-# must be done after initializing own completion
+# must be done after initializing all zle widgets
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
