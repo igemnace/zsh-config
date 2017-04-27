@@ -33,6 +33,10 @@ fzf_dirty_files() {
   git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview-window=up:50% --preview='git diff --color=always {}'
 }
 
+fzf_modified_files() {
+  git status --porcelain --untracked-files=no | cut -c 1,2,3 --complement | fzf --multi --preview-window=up:50% --preview='git diff --color=always {}'
+}
+
 # for commits
 fzf_commits() {
   git log --pretty=oneline --abbrev-commit | fzf --preview-window=up:50% --preview 'echo {} | cut -f 1 -d " " | xargs git show --color=always' | cut -f 1 -d " "
@@ -157,7 +161,7 @@ alias gl='git log'
 alias gll='git log --pretty=oneline'
 alias gaz='git add $(fzf_dirty_files)'
 alias gpz='git add --patch $(fzf_dirty_files)'
-alias gdz='git diff $(fzf_dirty_files)'
+alias gdz='git diff $(fzf_modified_files)'
 alias gcz='git show $(fzf_commits)'
 
 # for editors
