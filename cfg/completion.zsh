@@ -2,6 +2,7 @@
 # compinstall needs them to detect settings
 
 # The following lines were added by compinstall
+
 zstyle ':completion:*' completer _complete _ignored _correct
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' expand prefix suffix
@@ -16,10 +17,10 @@ zstyle ':completion:*' max-errors 0
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' original true
 zstyle ':completion:*' preserve-prefix '//[^/]##/'
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' verbose true
 zstyle ':completion:*' rehash true
-zstyle :compinstall filename '/home/ian/.zshrc'
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*' verbose true
+zstyle :compinstall filename '/home/ian/.zsh/completion.zsh'
 
 autoload -Uz compinit
 compinit
