@@ -153,7 +153,11 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias gl='git log'
+alias gll='git log --pretty=oneline'
 alias gaz='git add $(fzf_dirty_files)'
+alias gpz='git add --patch $(fzf_dirty_files)'
+alias gdz='git diff $(fzf_dirty_files)'
 alias gcz='git show $(fzf_commits)'
 
 # for editors
