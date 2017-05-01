@@ -28,6 +28,11 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
 
 ### FZF FUNCTIONS
+# for files, but separated by whitespace instead of newlines
+fzf_argfiles() {
+  fzf --multi | tr '\n' ' '
+}
+
 # for unstaged changes and untracked files
 fzf_dirty_files() {
   git status --porcelain | cut -c 1,2,3 --complement | fzf --multi --preview-window=up:50% --preview='git diff --color=always {}'
@@ -170,8 +175,8 @@ alias gcz='git show $(fzf_commits)'
 # for editors
 alias v='vim'
 alias v.='vim .'
-alias vz='vim "$(fzf --multi)"'
-alias vgz='vim $(fzf_grep  | sed -e "s/:/ +/")'
+alias vz='vim $(fzf_argfiles)'
+alias vgz='vim $(fzf_grep | sed -e "s/:/ +/")'
 alias e='emacs -nw'
 alias ez='emacs -nw "$(fzf --multi)"'
 
