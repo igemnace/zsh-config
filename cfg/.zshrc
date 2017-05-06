@@ -66,7 +66,7 @@ fzf_alias() {
 fzf_grep() {
   # I use ripgrep here for speed
   # but the same thing can be done by grep -R .
-  rg -n '' | sed -e 's/:/+/' -e 's/:/\t/' -e 's/+/:/' | fzf | cut -f 1
+  rg --hidden -n '' | sed -e 's/:/+/' -e 's/:/\t/' -e 's/+/:/' | fzf | cut -f 1
 }
 ### END FZF
 
