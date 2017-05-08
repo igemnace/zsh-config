@@ -73,9 +73,11 @@ fzf_grep() {
 ### TODOTXT
 # define functions to sync todo.txt files to Dropbox
 upload_todos() {
-  dropbox_uploader upload "$HOME/todo.txt" todo.txt
-  dropbox_uploader upload "$HOME/done.txt" done.txt
-  dropbox_uploader upload "$HOME/notes.md" notes.md
+  dropbox_uploader upload "$HOME/todo.txt" todo.txt &
+  dropbox_uploader upload "$HOME/done.txt" done.txt &
+  dropbox_uploader upload "$HOME/notes.md" notes.md &
+
+  wait
 }
 ### END TODOTXT
 
