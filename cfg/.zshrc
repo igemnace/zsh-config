@@ -86,6 +86,12 @@ upload_todos() {
 export ANDROID_HOME="/opt/android-sdk"
 ### END ANDROID
 
+### SPRUNGE
+sprunge() {
+  curl -F "sprunge=<-" http://sprunge.us
+}
+### END SPRUNGE
+
 ### MISC CHANGES
 ### META SHELL CHANGES
 # force LANG
