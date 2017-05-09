@@ -21,8 +21,8 @@ Just run `install.sh`. This will automatically do the following:
 - Symlink `.zshrc` into your home directory (`zshrc.sh`)
 - Symlink completion options `completion.zsh` into `~/.zsh` (`completion.sh`)
 - Git clone base16-shell colorscheme into your home directory (`base16.sh`)
-- Git clone my "highlight" zsh theme into oh-my-zsh directory
-  (`prompt-theme.sh`)
+- Git clone my "highlight" zsh theme into `~/.zsh` (`prompt-theme.sh`)
+- Symlink LS_COLORS file into `~/.zsh` (`ls-colors.sh`)
 
 ## Licensing
 
