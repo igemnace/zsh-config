@@ -169,9 +169,9 @@ alias tk='tmux kill-session -t'
 alias tx='tmux kill-server'
 
 # for git
-alias gs='git status -s'
+alias gs='git status --short'
 alias ga='git add'
-alias gc='git commit -v'
+alias gc='git commit --verbose'
 alias gd='git diff'
 alias gl='git log'
 alias gll='git log --pretty=oneline'
