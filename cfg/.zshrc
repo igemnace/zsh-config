@@ -205,6 +205,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Documents/Misc/scripts:$PATH"
 export PATH="$HOME/Documents/Misc/scripts/todotxt-helper:$PATH"
 export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
+export PATH="$HOME/.gem/ruby/2.4.0/bin:$PATH"
 
 ### SYNTAX HIGHLIGHTING
 # must be at the end of zshrc
