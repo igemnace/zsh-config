@@ -200,6 +200,7 @@ alias cpz='cmus-remote -p $(fzf_music)'
 # misc aliases
 alias ls='ls --color=auto'
 alias manz='man $(fzf_apropos)'
+alias n='notify-exit.sh'
 
 ### PATH
 export PATH="/usr/local/heroku/bin:$PATH"
