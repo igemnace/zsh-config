@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+mkdir -p "$HOME"/.zsh
+
+dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+ln -s "$dir/../cfg/completion.zsh" "$HOME/.zsh/completion.zsh"

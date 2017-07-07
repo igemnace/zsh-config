@@ -17,12 +17,12 @@ See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
 
 ## Installation
 
-Just run `install.sh`. This will automatically do the following:
-- Symlink `.zshrc` into your home directory (`zshrc.sh`)
-- Symlink completion options `completion.zsh` into `~/.zsh` (`completion.sh`)
-- Git clone base16-shell colorscheme into your home directory (`base16.sh`)
-- Git clone my "highlight" zsh theme into `~/.zsh` (`prompt-theme.sh`)
-- Symlink LS_COLORS file into `~/.zsh` (`ls-colors.sh`)
+Just run `./install`. This will automatically do the following:
+- Symlink `.zshrc` into your home directory (`install-zshrc`)
+- Symlink completion options `completion.zsh` into `~/.zsh` (`install-completion`)
+- Git clone base16-shell colorscheme into your home directory (`install-base16`)
+- Git clone my "highlight" zsh theme into `~/.zsh` (`install-prompt-theme`)
+- Symlink LS_COLORS file into `~/.zsh` (`install-ls-colors`)
 
 ## Licensing
 
