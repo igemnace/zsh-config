@@ -2,7 +2,7 @@
 newline=$'\n'
 
 ### CONTEXT
-### prints username, hostname, and directory
+### prints directory
 collapse_pwd() {
   if [[ $PWD == $HOME ]]; then
     echo "%F{4}%B~%f%b"
@@ -12,32 +12,33 @@ collapse_pwd() {
     echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{4}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
   fi
 }
-custom_prompt_context='%F{8}$(collapse_pwd)%{$reset_color%}'
+custom_prompt_context='%F{8}$(collapse_pwd)%f'
 
 ### GIT
 ### prints git branch and status
+### but only if current dir is a git repo
 git_info() {
   if (git status --porcelain 2>/dev/null >/dev/null); then
     status_output=$(git status -b --porcelain)
     stash_output=$(git stash list)
-    first_line=$(echo $status_output | sed -e '1q')
-    rest_lines=$(echo $status_output | sed -e '1d')
+    first_line=$(sed -e '1q' <<< "$status_output")
+    rest_lines=$(sed -e '1d' <<< "$status_output")
 
-    branch=$(echo $first_line | sed -E -e 's/## (.*)(\.\.\..*|$)/\1/')
-    ahead=$(echo $first_line | sed -E -e 's/.*\[ahead (\w+)\].*/\1/')
-    behind=$(echo $first_line | sed -E -e 's/.*\[behind (\w+)\].*/\1/')
-    unstaged=$(echo $rest_lines | cut -c 2 | tr -d ' \n?')
-    staged=$(echo $rest_lines | cut -c 1 | tr -d ' \n?')
-    untracked=$(echo $rest_lines | cut -c 1 | tr -d ' \n')
+    branch=$(sed -E -e 's/## (.*)(\.\.\..*|$)/\1/' <<< "$first_line")
+    ahead=$(sed -E -e 's/.*\[ahead (\w+)\].*/\1/' <<< "$first_line")
+    behind=$(sed -E -e 's/.*\[behind (\w+)\].*/\1/' <<< "$first_line")
+    unstaged=$(cut -c 2 <<< "$rest_lines" | tr -d ' \n?')
+    staged=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n?')
+    untracked=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n')
 
     stashed=""
-    [[ $stash_output != "" ]] && stashed=$(echo $stash_output | wc -l)
+    [[ -n $stash_output ]] && stashed=$(wc -l <<< "$stash_output")
 
     track_flag=""
-    [[ $staged != "" ]] && track_flag+="+"
-    [[ $unstaged != "" ]] && track_flag+="!"
+    [[ -n $staged ]] && track_flag+="+"
+    [[ -n $unstaged ]] && track_flag+="!"
     [[ $untracked == *\?* ]] && track_flag+="?"
-    if [[ $track_flag == "" ]]; then
+    if [[ -z $track_flag ]]; then
       final_track_flag=""
     else
       final_track_flag="%F{3}${track_flag}%f"
@@ -45,7 +46,7 @@ git_info() {
 
     ahead_flag=""
     [[ ! $ahead =~ "##" ]] && ahead_flag="$ahead"
-    if [[ $ahead_flag == "" ]]; then
+    if [[ -z $ahead_flag ]]; then
       final_ahead_flag=""
     else
       final_ahead_flag="%F{6}+${ahead}%f"
@@ -53,7 +54,7 @@ git_info() {
 
     behind_flag=""
     [[ ! $behind =~ "##" ]] && behind_flag="$behind"
-    if [[ $behind_flag == "" ]]; then
+    if [[ -z $behind_flag ]]; then
       final_behind_flag=""
     else
       final_behind_flag="%F{1}-${behind}%f"
@@ -61,27 +62,28 @@ git_info() {
 
     stash_flag=""
     [[ $stashed != 0 ]] && stash_flag="$stashed"
-    if [[ $stash_flag == "" ]]; then
+    if [[ -z $stash_flag ]]; then
       final_stash_flag=""
     else
       final_stash_flag="%F{2}s%f"
     fi
 
     combined_flags="${final_track_flag}${final_stash_flag}${final_ahead_flag}${final_behind_flag}"
-    if [[ $combined_flags == "" ]]; then
+    if [[ -z $combined_flags ]]; then
       final_flags=""
     else
       final_flags="%F{8}[%B${combined_flags}%b%F{8}]"
       # final_flags=$combined_flags
     fi
 
-    echo "%F{8}git:%F{5}%B${branch}%b${final_flags}%{$reset_color%}"
+    echo "%F{8}git:%F{5}%B${branch}%b${final_flags}%f"
   fi
 }
 custom_prompt_git='$(git_info)'
 
 ### NODE
 ### prints node version
+### but only if package.json exists in current directory
 node_info() {
   if [[ -d "./node_modules" ]]; then
     node_modules_flag=""
@@ -96,10 +98,11 @@ custom_prompt_node='$(node_info)'
 
 ### SUFFIX
 ### prints input prompt
-custom_prompt_suffix='%F{8}%%%{$reset_color%} '
+custom_prompt_suffix='%F{8}%% %f'
 
 ### EXIT
 ### prints last exit code
+### but only if non-zero
 colored_exit_code() {
   echo "%(?..${newline}%F{8}exit %F{1}%?)%f"
 }
@@ -107,12 +110,20 @@ custom_prompt_exit='$(colored_exit_code)'
 
 ### JOBS
 ### prints background jobs
+### but only if there exists at least one
 background_jobs() {
-  if [[ $(jobs) != "" ]]; then
-    num=$(jobs | grep -c '')
-    echo "%F{4}bg %{$reset_color%}"
-  fi
+  [[ -n $(jobs) ]] && echo "%F{4}bg %f"
 }
 custom_prompt_jobs='$(background_jobs)'
 
-export PROMPT="${newline}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_node}${custom_prompt_exit}${newline}${custom_prompt_jobs}${custom_prompt_suffix}%F{7}"
+### ID
+### prints username and hostname
+### but only if logged in through ssh
+user_id() {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "%F{8}%n@%F{3}%B%m%b%F{8}: %f"
+  fi
+}
+custom_prompt_id='$(user_id)'
+
+export PROMPT="${newline}${custom_prompt_id}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_node}${custom_prompt_exit}${newline}${custom_prompt_jobs}${custom_prompt_suffix}%F{7}"
