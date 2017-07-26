@@ -211,7 +211,6 @@ alias lz='less $(fzf)'
 alias n='notify-exit.sh'
 
 ### PATH
-export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Documents/Misc/scripts:$PATH"
 export PATH="$HOME/Documents/Misc/scripts/todotxt-helper:$PATH"
