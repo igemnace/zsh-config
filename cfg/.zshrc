@@ -201,6 +201,7 @@ alias cpz='cmus-remote -p $(fzf_music)'
 # misc aliases
 alias ls='ls --color=auto'
 alias manz='man $(fzf_apropos)'
+alias lz='less $(fzf)'
 alias n='notify-exit.sh'
 
 ### PATH
