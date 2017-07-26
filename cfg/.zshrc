@@ -92,6 +92,12 @@ sprunge() {
 }
 ### END SPRUNGE
 
+### INOTIFY-TOOLS
+watchdir() {
+  inotifywait -rme modify --format '%w%f' "$1"
+}
+### END INOTIFY-TOOLS
+
 ### MISC CHANGES
 ### META SHELL CHANGES
 # force LANG
