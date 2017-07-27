@@ -4,7 +4,7 @@ newline=$'\n'
 ### CONTEXT
 ### prints directory
 collapse_pwd() {
-  if [[ $PWD == $HOME ]]; then
+  if [[ $PWD == "$HOME" ]]; then
     echo "%F{4}%B~%f%b"
   elif [[ $PWD == "/" ]]; then
     echo "%F{4}%B/%f%b"
@@ -18,15 +18,15 @@ custom_prompt_context='%F{8}$(collapse_pwd)%f'
 ### prints git branch and status
 ### but only if current dir is a git repo
 git_info() {
-  if (git status --porcelain 2>/dev/null >/dev/null); then
+  if git status --porcelain &>/dev/null; then
     status_output=$(git status -b --porcelain)
     stash_output=$(git stash list)
-    first_line=$(sed -e '1q' <<< "$status_output")
-    rest_lines=$(sed -e '1d' <<< "$status_output")
+    first_line=$(sed -n '1p' <<< "$status_output")
+    rest_lines=$(sed -n '2,$p' <<< "$status_output")
 
-    branch=$(sed -E -e 's/## (.*)(\.\.\..*|$)/\1/' <<< "$first_line")
-    ahead=$(sed -E -e 's/.*\[ahead (\w+)\].*/\1/' <<< "$first_line")
-    behind=$(sed -E -e 's/.*\[behind (\w+)\].*/\1/' <<< "$first_line")
+    branch=$(sed -E 's/## (.*)(\.\.\..*|$)/\1/' <<< "$first_line")
+    ahead=$(sed -E 's/.*\[ahead (\w+)\].*/\1/' <<< "$first_line")
+    behind=$(sed -E 's/.*\[behind (\w+)\].*/\1/' <<< "$first_line")
     unstaged=$(cut -c 2 <<< "$rest_lines" | tr -d ' \n?')
     staged=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n?')
     untracked=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n')
