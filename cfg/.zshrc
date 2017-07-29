@@ -70,17 +70,6 @@ fzf_grep() {
 }
 ### END FZF
 
-### TODOTXT
-# define functions to sync todo.txt files to Dropbox
-upload_todos() {
-  dropbox_uploader upload "$HOME/todo.txt" todo.txt &
-  dropbox_uploader upload "$HOME/done.txt" done.txt &
-  dropbox_uploader upload "$HOME/notes.md" notes.md &
-
-  wait
-}
-### END TODOTXT
-
 ### ANDROID
 # add ANDROID_HOME env variable, apparently used by the SDK and Gradle
 export ANDROID_HOME="/opt/android-sdk"
