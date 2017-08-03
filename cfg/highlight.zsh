@@ -25,8 +25,8 @@ git_info() {
     rest_lines=$(sed -n '2,$p' <<< "$status_output")
 
     branch=$(sed -E 's/## (.*)(\.\.\..*|$)/\1/' <<< "$first_line")
-    ahead=$(sed -E 's/.*\[ahead (\w+)\].*/\1/' <<< "$first_line")
-    behind=$(sed -E 's/.*\[behind (\w+)\].*/\1/' <<< "$first_line")
+    ahead=$(sed -E 's/.*\[.*ahead (\w+).*/\1/' <<< "$first_line")
+    behind=$(sed -E 's/.*\[.*behind (\w+).*/\1/' <<< "$first_line")
     unstaged=$(cut -c 2 <<< "$rest_lines" | tr -d ' \n?')
     staged=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n?')
     untracked=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n')
