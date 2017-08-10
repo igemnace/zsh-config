@@ -22,10 +22,10 @@ enable_nvm() {
 ### FZF
 # use ripgrep instead of find to populate files
 # only used when fzf is called without piping anything into stdin
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
 
 # customize colors to blend in with my own highlight.zsh theme
-export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
+FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
 
 ### FZF FUNCTIONS
 # for files, but separated by whitespace instead of newlines
@@ -70,11 +70,6 @@ fzf_grep() {
 }
 ### END FZF
 
-### ANDROID
-# add ANDROID_HOME env variable, apparently used by the SDK and Gradle
-export ANDROID_HOME="/opt/android-sdk"
-### END ANDROID
-
 ### SPRUNGE
 sprunge() {
   curl -F "sprunge=<-" http://sprunge.us
@@ -89,47 +84,26 @@ watchdir() {
 
 ### MISC CHANGES
 ### META SHELL CHANGES
-# force LANG
-export LANG="en_US.UTF-8"
-
-# use vim as primary editor
-export VISUAL=vim
-export EDITOR=vim
-
 # force emacs key bindings
 bindkey -e
 
 ### THEME
 # make ls colors explicit
-source $HOME/.zsh/lscolors.zsh
+source "$HOME/.zsh/lscolors.zsh"
 
 # enable prompt substitution
 setopt prompt_subst
 
 # use my custom highlight.zsh theme
-source $HOME/.zsh/highlight.zsh
-
-### LINE-EDITING
-# do not count / and . as part of a word
-# to make it easier to edit paths
-export WORDCHARS='*?_[]-~=&;!#$%^(){}<>'
+source "$HOME/.zsh/highlight.zsh"
 
 ### HISTORY
-# set up history file
-HISTFILE=$HOME/.zsh_history
-
 # append each command to the history file
 setopt inc_append_history
 
 # auto reload the history file upon modifying
 # such as when a different shell instance appends to it
 setopt share_history
-
-# load up to 5000 entries from the history file on startup
-HISTSIZE=5000
-
-# save up to 5000 entries for completion
-SAVEHIST=5000
 
 # make Up and Down cycle through history completions
 autoload -U up-line-or-beginning-search
@@ -150,7 +124,7 @@ bindkey " " magic-space
 
 ### COMPLETION
 # source completion config
-source $HOME/.zsh/completion.zsh
+source "$HOME/.zsh/completion.zsh"
 
 # source fzf completion
 # must be done after initializing all zle widgets
@@ -201,13 +175,6 @@ alias ls='ls --color=auto'
 alias manz='man $(fzf_apropos)'
 alias lz='less $(fzf)'
 alias n='notify-exit.sh'
-
-### PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/Documents/Misc/scripts:$PATH"
-export PATH="$HOME/Documents/Misc/scripts/todotxt-helper:$PATH"
-export PATH="/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH"
-export PATH="$HOME/.gem/ruby/2.4.0/bin:$PATH"
 
 ### SYNTAX HIGHLIGHTING
 # must be at the end of zshrc
