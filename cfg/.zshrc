@@ -97,7 +97,21 @@ setopt prompt_subst
 # use my custom highlight.zsh theme
 source "$HOME/.zsh/highlight.zsh"
 
+### LINE EDITING
+# do not count / and . as part of a word
+# to make it easier to edit paths
+WORDCHARS='*?_[]-~=&;!#$%^(){}<>'
+
 ### HISTORY
+# set up history file
+HISTFILE="$HOME/.zsh_history"
+
+# load up to 5000 entries from the history file on startup
+HISTSIZE=5000
+
+# save up to 5000 entries for completion
+SAVEHIST=5000
+
 # append each command to the history file
 setopt inc_append_history
 
