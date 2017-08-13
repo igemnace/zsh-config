@@ -22,10 +22,10 @@ enable_nvm() {
 ### FZF
 # use ripgrep instead of find to populate files
 # only used when fzf is called without piping anything into stdin
-FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
 
 # customize colors to blend in with my own highlight.zsh theme
-FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
+export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
 
 ### FZF FUNCTIONS
 # for files, but separated by whitespace instead of newlines
