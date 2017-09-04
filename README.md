@@ -10,7 +10,6 @@ Make sure that your machine satisfies the following:
 - Has zsh
 - Has no pre-existing `.zshrc` (backup and remove if existing)
 - Has env, bash, and git (required by install scripts)
-- Has a working internet connection (will be cloning a git repo for base16)
 
 To make use of the optional fzf integration, you must also have installed fzf.
 See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
@@ -20,8 +19,7 @@ See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
 Just run `./install`. This will automatically do the following:
 - Symlink `.zshrc` into your home directory (`install-zshrc`)
 - Symlink completion options `completion.zsh` into `~/.zsh` (`install-completion`)
-- Git clone base16-shell colorscheme into your home directory (`install-base16`)
-- Git clone my "highlight" zsh theme into `~/.zsh` (`install-prompt-theme`)
+- Symlink my "highlight" zsh theme into `~/.zsh` (`install-prompt-theme`)
 - Symlink LS_COLORS file into `~/.zsh` (`install-ls-colors`)
 
 ## Licensing

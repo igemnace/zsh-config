@@ -12,7 +12,7 @@ collapse_pwd() {
     echo ${${:-/${(j:/:)${(M)${(s:/:)${(D)PWD:h}}#(|.)[^.]}}/%F{4}%B${PWD:t}%b}//\/~/\~} | sed -e 's/\/\//\//'
   fi
 }
-custom_prompt_context='%F{8}$(collapse_pwd)%f'
+custom_prompt_context='%F{15}$(collapse_pwd)%f'
 
 ### GIT
 ### prints git branch and status
@@ -72,11 +72,11 @@ git_info() {
     if [[ -z $combined_flags ]]; then
       final_flags=""
     else
-      final_flags="%F{8}[%B${combined_flags}%b%F{8}]"
+      final_flags="%F{15}[%B${combined_flags}%b%F{15}]"
       # final_flags=$combined_flags
     fi
 
-    echo "%F{8}git:%F{5}%B${branch}%b${final_flags}%f"
+    echo "%F{15}git:%F{5}%B${branch}%b${final_flags}%f"
   fi
 }
 custom_prompt_git='$(git_info)'
@@ -88,23 +88,23 @@ node_info() {
   if [[ -d "./node_modules" ]]; then
     node_modules_flag=""
   else
-    node_modules_flag="%F{8}%b[%F{3}%B!%b%F{8}]%f%b"
+    node_modules_flag="%F{15}%b[%F{3}%B!%b%F{15}]%f%b"
   fi
   if [[ -f "./package.json" ]]; then
-    echo "%F{8}node:%F{1}%B$(node --version | sed -e 's/v//')%f%b$node_modules_flag"
+    echo "%F{15}node:%F{1}%B$(node --version | sed -e 's/v//')%f%b$node_modules_flag"
   fi
 }
 custom_prompt_node='$(node_info)'
 
 ### SUFFIX
 ### prints input prompt
-custom_prompt_suffix='%F{8}%% %f'
+custom_prompt_suffix='%F{15}%% %f'
 
 ### EXIT
 ### prints last exit code
 ### but only if non-zero
 colored_exit_code() {
-  echo "%(?..${newline}%F{8}exit %F{1}%?)%f"
+  echo "%(?..${newline}%F{15}exit %F{1}%?)%f"
 }
 custom_prompt_exit='$(colored_exit_code)'
 
@@ -121,7 +121,7 @@ custom_prompt_jobs='$(background_jobs)'
 ### but only if logged in through ssh
 user_id() {
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    echo "%F{8}%n@%F{3}%B%m%b%F{8}: %f"
+    echo "%F{15}%n@%F{3}%B%m%b%F{15}: %f"
   fi
 }
 custom_prompt_id='$(user_id)'

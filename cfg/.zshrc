@@ -1,16 +1,3 @@
-### BASE-16 SHELL
-# define function to enable base16 helper in current shell instance
-# sourcing impacts startup time, so execute only when needed
-enable_base16_shell() {
-  BASE16_SHELL=$HOME/.config/base16-shell/
-  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-}
-
-# outside tmux, colors misbehave
-# enable base16 helper automatically in such cases
-[[ $TMUX = ""  ]] && enable_base16_shell
-### END BASE-16 SHELL
-
 ### NVM
 # define function to enable nvm in current shell instance
 # sourcing impacts startup time, so execute only when needed
@@ -25,7 +12,7 @@ enable_nvm() {
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!build/*"'
 
 # customize colors to blend in with my own highlight.zsh theme
-export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:8,pointer:3,marker:2'
+export FZF_DEFAULT_OPTS='--no-bold --color=fg:7,fg+:3,bg:-1,bg+:-1,hl:6,hl+:6,prompt:15,pointer:3,marker:2'
 
 ### FZF FUNCTIONS
 # for files, but separated by whitespace instead of newlines
