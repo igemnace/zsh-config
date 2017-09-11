@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 
 ./scripts/install-zshrc
-./scripts/install-completion
-./scripts/install-prompt-theme
-./scripts/install-ls-colors
+./scripts/install-zsh

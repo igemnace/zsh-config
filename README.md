@@ -1,14 +1,15 @@
 # my-zsh-config
 
-Easy way to transfer my zsh configuration across multiple machines.
+Easy way to transfer my ZSH configuration across multiple machines.
 
 ## Pre-Installation
 
 Make sure that your machine satisfies the following:
 - Is using GNU/Linux (scripts are untested on other UNIX systems and will
   flat-out fail on Windows)
-- Has zsh
-- Has no pre-existing `.zshrc` (backup and remove if existing)
+- Has ZSH
+- Has no pre-existing `.zshrc`, `.zprofile`, and `.zsh` (backup and remove if
+  existing)
 - Has env, bash, and git (required by install scripts)
 
 To make use of the optional fzf integration, you must also have installed fzf.
@@ -16,11 +17,10 @@ See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
 
 ## Installation
 
-Just run `./install`. This will automatically do the following:
+Just run `./install` from the repository's root directory. This will
+automatically do the following:
 - Symlink `.zshrc` into your home directory (`install-zshrc`)
-- Symlink completion options `completion.zsh` into `~/.zsh` (`install-completion`)
-- Symlink my "highlight" zsh theme into `~/.zsh` (`install-prompt-theme`)
-- Symlink LS_COLORS file into `~/.zsh` (`install-ls-colors`)
+- Symlink all of the contents of `.zsh` into your home directory (`install-zsh`)
 
 ## Licensing
 

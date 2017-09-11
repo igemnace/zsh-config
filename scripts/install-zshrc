@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 
-dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
-ln -s "$dir/../cfg/.zshrc" "$HOME/.zshrc"
-ln -s "$dir/../cfg/.zprofile" "$HOME/.zprofile"
+ln -s "$PWD/cfg/.zshrc" "$HOME/.zshrc"
+ln -s "$PWD/cfg/.zprofile" "$HOME/.zprofile"
