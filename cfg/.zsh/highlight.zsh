@@ -1,6 +1,5 @@
 # cache newline in a variable
 newline=$'\n'
-setopt BASH_REMATCH
 
 ### CONTEXT
 ### prints directory
@@ -20,40 +19,59 @@ custom_prompt_context='%F{15}$(collapse_pwd)%f'
 ### but only if current dir is a git repo
 git_info() {
   if git status --porcelain &>/dev/null; then
-    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    unstaged=$(git diff --name-only --diff-filter=a 2>/dev/null)
-    staged=$(git diff --cached --name-only 2>/dev/null)
-    untracked=$(git diff --name-only --diff-filter=A 2>/dev/null)
+    status_output=$(git status -b --porcelain)
+    stash_output=$(git stash list)
+    first_line=$(sed -n '1p' <<< "$status_output")
+    rest_lines=$(sed -n '2,$p' <<< "$status_output")
 
-    if ! git diff-index --quiet --cached HEAD --; then
-      track_flag+="+"
-    fi
-    if ! git diff-files --quiet; then
-      track_flag+="!"
-    fi
-    if [[ -n $(git ls-files --exclude-standard --others) ]]; then
-      track_flag+="?"
-    fi
-    if [[ -n $track_flag ]]; then
+    branch=$(sed -E 's/## (.*)(\.\.\..*|$)/\1/' <<< "$first_line")
+    ahead=$(sed -E 's/.*\[.*ahead (\w+).*/\1/' <<< "$first_line")
+    behind=$(sed -E 's/.*\[.*behind (\w+).*/\1/' <<< "$first_line")
+    unstaged=$(cut -c 2 <<< "$rest_lines" | tr -d ' \n?')
+    staged=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n?')
+    untracked=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n')
+
+    stashed=""
+    [[ -n $stash_output ]] && stashed=$(wc -l <<< "$stash_output")
+
+    track_flag=""
+    [[ -n $staged ]] && track_flag+="+"
+    [[ -n $unstaged ]] && track_flag+="!"
+    [[ $untracked == *\?* ]] && track_flag+="?"
+    if [[ -z $track_flag ]]; then
+      final_track_flag=""
+    else
       final_track_flag="%F{3}${track_flag}%f"
     fi
 
-    ahead=$(git rev-list @{u}..@ 2>/dev/null | wc -l)
-    if (( $ahead )); then
+    ahead_flag=""
+    [[ ! $ahead =~ "##" ]] && ahead_flag="$ahead"
+    if [[ -z $ahead_flag ]]; then
+      final_ahead_flag=""
+    else
       final_ahead_flag="%F{6}+${ahead}%f"
     fi
 
-    behind=$(git rev-list @..@{u} 2>/dev/null | wc -l)
-    if (( $behind )); then
+    behind_flag=""
+    [[ ! $behind =~ "##" ]] && behind_flag="$behind"
+    if [[ -z $behind_flag ]]; then
+      final_behind_flag=""
+    else
       final_behind_flag="%F{1}-${behind}%f"
     fi
 
-    if (( $(git stash list | wc -l) )); then
+    stash_flag=""
+    [[ $stashed != 0 ]] && stash_flag="$stashed"
+    if [[ -z $stash_flag ]]; then
+      final_stash_flag=""
+    else
       final_stash_flag="%F{2}s%f"
     fi
 
     combined_flags="${final_track_flag}${final_stash_flag}${final_ahead_flag}${final_behind_flag}"
-    if [[ -n $combined_flags ]]; then
+    if [[ -z $combined_flags ]]; then
+      final_flags=""
+    else
       final_flags="%F{15}[%B${combined_flags}%b%F{15}]"
       # final_flags=$combined_flags
     fi
