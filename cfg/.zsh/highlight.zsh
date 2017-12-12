@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # cache newline in a variable
 newline=$'\n'
 

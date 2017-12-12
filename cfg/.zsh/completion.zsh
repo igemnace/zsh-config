@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # IMPORTANT: do not modify, even the comments
 # compinstall needs them to detect settings
 
