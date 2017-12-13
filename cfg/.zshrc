@@ -1,8 +1,3 @@
-### SCRIPT SOURCING
-for file in "$HOME/.zsh"/*.zsh; do
-  [[ -f $file ]] && source "$file"
-done
-
 ### FUNCTIONS
 aur() {
   for package in "$@"; do
@@ -96,3 +91,8 @@ alias glp='git log --oneline @{u}..HEAD'
 alias e='emacs -nw'
 alias ls='ls --color=auto'
 alias n='notify-exit.sh'
+
+### SCRIPT SOURCING
+for file in "$HOME/.zsh"/*.zsh; do
+  [[ -f $file ]] && source "$file"
+done
