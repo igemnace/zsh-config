@@ -1,20 +1,20 @@
 ### FUNCTIONS
-aur() {
-  for package in "$@"; do
-    aur_clone "$package" && aur_install "$package"
+binify() {
+  for arg; do
+    ln -s "$PWD/$arg" "$HOME/.local/bin/$arg"
   done
-}
-
-enable_nvm() {
-  source /usr/share/nvm/init-nvm.sh
 }
 
 sprunge() {
   curl -F "sprunge=<-" http://sprunge.us
 }
 
-watchdir() {
-  inotifywait -rme modify --format '%w%f' "$1"
+ixio() {
+  curl -F 'f:1=<-' ix.io
+}
+
+vg() {
+  vim -q <(rg --vimgrep --no-heading "$1") +copen
 }
 
 ### META SHELL CHANGES
@@ -90,7 +90,6 @@ alias glp='git log --oneline @{u}..HEAD'
 # misc aliases
 alias e='emacs -nw'
 alias ls='ls --color=auto'
-alias n='notify-exit.sh'
 
 ### SCRIPT SOURCING
 for file in "$HOME/.zsh"/*.zsh; do
