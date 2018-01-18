@@ -6,7 +6,7 @@ binify() {
 }
 
 sprunge() {
-  curl -F "sprunge=<-" http://sprunge.us
+  curl -F 'sprunge=<-' sprunge.us
 }
 
 ixio() {
