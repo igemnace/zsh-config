@@ -25,6 +25,14 @@ vg() {
   vim +"Grep ${*:?No pattern provided.}" +copen
 }
 
+cdh() {
+  cd "$HOME/$@"
+}
+
+detach() {
+  "$@" &>/dev/null & disown
+}
+
 ### META SHELL CHANGES
 # force emacs key bindings
 bindkey -e
