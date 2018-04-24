@@ -5,6 +5,14 @@ binify() {
   done
 }
 
+binedit() {
+  files=()
+  for arg; do
+    files+=("$(command -v "$arg")")
+  done
+  vim "${files[@]}"
+}
+
 sprunge() {
   curl -F 'sprunge=<-' sprunge.us
 }
