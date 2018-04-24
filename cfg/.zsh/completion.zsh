@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+fpath+=("$HOME/.local/share/zsh/site-functions")
+
 # IMPORTANT: do not modify, even the comments
 # compinstall needs them to detect settings
 
