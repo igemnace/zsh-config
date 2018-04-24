@@ -22,7 +22,7 @@ ixio() {
 }
 
 vg() {
-  vim -q <(rg --vimgrep --no-heading "$1") +copen
+  vim +"Grep ${*:?No pattern provided.}" +copen
 }
 
 ### META SHELL CHANGES
