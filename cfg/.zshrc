@@ -14,11 +14,19 @@ binedit() {
 }
 
 sprunge() {
-  curl -F 'sprunge=<-' sprunge.us
+  curl -F 'sprunge=<-' http://sprunge.us/
 }
 
 ixio() {
-  curl -F 'f:1=<-' ix.io
+  curl -F 'f:1=<-' http://ix.io/
+}
+
+elimage() {
+  curlargs=()
+  for arg; do
+    curlargs+=(-F 'name=@'"$PWD/$arg")
+  done
+  curl "${curlargs[@]}" https://img.vim-cn.com/
 }
 
 vg() {
