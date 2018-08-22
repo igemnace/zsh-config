@@ -7,7 +7,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.4.0/bin"
 
 # set AUR_DIR for my aur tools
-export AUR_DIR="$HOME/Downloads/AUR"
+export AUR_DIR="$HOME/abs/aur"
 
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
