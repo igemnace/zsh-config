@@ -20,10 +20,13 @@ ez() {
 alias vz=ez
 
 # for existing man pages
-fzf_apropos() {
-  apropos '' | fzf --preview-window=up:50% --preview 'echo {} | cut -f 1,2 -d " " | tr -d \(\) | sed "s/\(\S\+\) \(\S\+\)/\2 \1/" | xargs man' | cut -f 1,2 -d " " | tr -d '()' | sed 's/\(\S\+\) \(\S\+\)/\2 \1/'
+manz() {
+  apropos '' |
+    fzf --preview-window=up:50% \
+      --preview 'awk -v FS="[() ]" "{print \$3, \$1}" <<< {} | xargs man' |
+    awk -v FS='[() ]' '{print $3, $1}' |
+    xargs man
 }
-alias manz='man $(fzf_apropos)'
 
 # source fzf completion
 source /usr/share/fzf/key-bindings.zsh
