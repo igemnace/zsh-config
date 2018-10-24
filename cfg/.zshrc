@@ -14,11 +14,11 @@ binedit() {
 }
 
 sprunge() {
-  curl -F 'sprunge=<-' http://sprunge.us/
+  tail -n +1 -- "$@" | curl -F 'sprunge=<-' http://sprunge.us/
 }
 
 ixio() {
-  curl -F 'f:1=<-' http://ix.io/
+  tail -n +1 -- "$@" | curl -F 'f:1=<-' http://ix.io/
 }
 
 elimage() {
