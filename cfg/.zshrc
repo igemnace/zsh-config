@@ -96,6 +96,7 @@ alias tx='tmux kill-server'
 
 # for git
 alias gs='git status --short'
+alias gsi='git status --short --ignored'
 alias ga='git add'
 alias gu='git reset HEAD'
 alias gc='git commit --verbose'
