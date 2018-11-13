@@ -41,6 +41,10 @@ detach() {
   "$@" &>/dev/null & disown
 }
 
+:h() {
+  vim +"h $*" +only
+}
+
 ### META SHELL CHANGES
 # force emacs key bindings
 bindkey -e
