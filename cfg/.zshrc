@@ -121,6 +121,7 @@ alias grc='git rebase --continue'
 # misc aliases
 alias e='emacs -nw'
 alias ls='ls --color=auto'
+alias lx=exa
 
 ### SCRIPT SOURCING
 for file in "$HOME/.zsh"/*.zsh; do
