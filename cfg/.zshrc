@@ -30,7 +30,7 @@ elimage() {
 }
 
 vg() {
-  vim +"Grep ${*:?No pattern provided.}" +copen
+  vim +copen -q <(rg --vimgrep --column --no-heading "${@:?No pattern provided.}")
 }
 
 cdh() {
