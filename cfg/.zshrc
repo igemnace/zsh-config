@@ -29,6 +29,10 @@ elimage() {
   curl "${curlargs[@]}" https://img.vim-cn.com/
 }
 
+serveo() {
+  ssh -R 80:localhost:"${@:?No port provided.}" serveo.net
+}
+
 vg() {
   vim +copen -q <(rg --vimgrep --column --no-heading "${@:?No pattern provided.}")
 }
