@@ -44,12 +44,36 @@ git_info() {
     rest_lines=$(tail -n +2 <<< "$status_output")
 
     # first line of status_output contains branch name and ahead/behind info
-    local branch ahead behind
-    [[ $first_line =~ '## (.*)(\.\.\..*|$)' ]] && branch=${match[1]}
-    [[ $first_line =~ '.*\[.*ahead (\w+).*' ]] && ahead=${match[1]}
-    [[ $first_line =~ '.*\[.*behind (\w+).*' ]] && behind=${match[1]}
+    # possible formats are:
+    # ## branch
+    # ## branch...upstream
+    # ## branch...upstream [ahead n]
+    # ## branch...upstream [behind n]
+    # ## branch...upstream [ahead m, behind n]
+    local branch temp ahead behind
 
-    # ahead/behind flags
+    # branch is simple: just remove the leading ##, then remove ... onwards
+    # works even in the simple case: ## branch
+    # since there's no ... to remove -- the branch is already isolated as is
+    temp="${first_line#\#\# }"
+    branch="${temp%...*}"
+
+    # parse out ahead/behind status
+    if [[ $first_line =~ 'ahead|behind' ]]; then
+      temp="${first_line#*\[}"
+      temp="${temp%]}"
+      # by this point, ahead/behind status should be isolated, e.g.
+      # ahead m, behind n
+      local key value
+      while read -rd , key value; do
+        case $key in
+          ahead) ahead="$value";;
+          behind) behind="$value";;
+        esac
+      done <<< "$temp,"
+    fi
+
+    # format ahead/behind flags
     local ahead_flag
     local behind_flag
     (( $ahead )) && ahead_flag="%F{6}+${ahead}%f"
