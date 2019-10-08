@@ -126,7 +126,8 @@ node_package_info() {
   [[ -f ./package.json ]] || return
 
   local version
-  version="$(node -p "require('./package.json').version")"
+  version="$(node -p "require('./package.json').version || ''")"
+  [[ -n $version ]] || return
   echo "%F{8}package:%F{2}%B$version%f%b"
 }
 custom_prompt_package='$(node_package_info)'
