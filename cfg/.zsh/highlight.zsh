@@ -119,6 +119,18 @@ node_info() {
 }
 custom_prompt_node='$(node_info)'
 
+### NODE PACKAGE
+### prints node package version
+### extracted from package.json in current directory
+node_package_info() {
+  [[ -f ./package.json ]] || return
+
+  local version
+  version="$(node -p "require('./package.json').version")"
+  echo "%F{8}package:%F{2}%B$version%f%b"
+}
+custom_prompt_package='$(node_package_info)'
+
 ### SUFFIX
 ### prints input prompt
 custom_prompt_suffix='%F{8}%%%f'
@@ -149,4 +161,4 @@ user_id() {
 }
 custom_prompt_id='$(user_id)'
 
-export PROMPT="${nl}${custom_prompt_id}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_node}${custom_prompt_exit}${nl}${custom_prompt_jobs}${custom_prompt_suffix} %F{7}"
+export PROMPT="${nl}${custom_prompt_id}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_node} ${custom_prompt_package}${custom_prompt_exit}${nl}${custom_prompt_jobs}${custom_prompt_suffix} %F{7}"
