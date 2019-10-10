@@ -37,6 +37,14 @@ vg() {
   vim +copen -q <(rg --vimgrep --column --no-heading "${@:?No pattern provided.}")
 }
 
+vs() {
+  vim +Gstatus +'wincmd o'
+}
+
+vm() {
+  vim +Gmerge
+}
+
 cdh() {
   cd "$HOME/$@"
 }
