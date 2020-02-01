@@ -155,8 +155,21 @@ custom_prompt_jobs='$(background_jobs)'
 ### ID
 ### prints username and hostname
 ### but only if logged in through ssh
+in_ssh() {
+  # check common SSH env variables
+  [[ -n "$SSH_CLIENT" ]] && return 0
+  [[ -n "$SSH_TTY" ]] && return 0
+  # if not in tmux, no need to check the next block
+  command -v tmux &>/dev/null || return 1
+  [[ -n "$TMUX" ]] || return 1
+  # check SSH_CONNECTION env variable on attached client
+  [[ $(tmux showenv SSH_CONNECTION 2>/dev/null) != -SSH_CONNECTION ]] && return 0
+  # tests exhausted
+  return 1
+}
 user_id() {
-  if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+  local tmux_ssh_connection="$(tmux showenv SSH_CONNECTION 2>/dev/null)"
+  if in_ssh; then
     echo "%F{8}%n@%F{3}%B%m%b%F{8}: %f"
   fi
 }
