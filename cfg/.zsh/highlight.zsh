@@ -168,7 +168,6 @@ in_ssh() {
   return 1
 }
 user_id() {
-  local tmux_ssh_connection="$(tmux showenv SSH_CONNECTION 2>/dev/null)"
   if in_ssh; then
     echo "%F{8}%n@%F{3}%B%m%b%F{8}: %f"
   fi
