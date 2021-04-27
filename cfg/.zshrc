@@ -57,6 +57,27 @@ detach() {
   vim +"h $*" +only
 }
 
+n3 () {
+  # nnn's cd on quit mechanism. Taken from quitcd.bash_zsh
+  # Block nesting of nnn in subshells
+  if [ -n "$NNNLVL" ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+    echo "nnn is already running"
+    return
+  fi
+
+  # configure cd on quit
+  NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+  # run nnn
+  nnn "$@"
+
+  # source and clean up tempfile
+  if [ -f "$NNN_TMPFILE" ]; then
+    . "$NNN_TMPFILE"
+    rm -f "$NNN_TMPFILE" > /dev/null
+  fi
+}
+
 ### META SHELL CHANGES
 # force emacs key bindings
 bindkey -e
