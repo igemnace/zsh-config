@@ -38,7 +38,7 @@ vg() {
 }
 
 vs() {
-  vim +Gstatus +'wincmd o'
+  vim +Git +'wincmd o'
 }
 
 vm() {
