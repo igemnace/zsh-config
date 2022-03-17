@@ -42,7 +42,7 @@ vs() {
 }
 
 vm() {
-  vim +Gmerge
+  vim +'Git mergetool'
 }
 
 cdh() {
@@ -57,7 +57,7 @@ detach() {
   vim +"h $*" +only
 }
 
-n3 () {
+n3() {
   # nnn's cd on quit mechanism. Taken from quitcd.bash_zsh
   # Block nesting of nnn in subshells
   if [ -n "$NNNLVL" ] && [ "${NNNLVL:-0}" -ge 1 ]; then
@@ -135,7 +135,7 @@ alias tx='tmux kill-server'
 alias gs='git status --short'
 alias gsi='git status --short --ignored'
 alias ga='git add'
-alias gu='git reset HEAD'
+alias gu='git rm --cached'
 alias gc='git commit --verbose'
 alias gca='git commit --amend'
 alias gcaa='git commit --amend --reuse-message=HEAD'
