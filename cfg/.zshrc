@@ -78,6 +78,18 @@ n3() {
   fi
 }
 
+rcopy-from() {
+  # Usage: rcopy-from USER@HOST
+  # convenience function: copy from a remote clipboard with rclip
+  rclip "${1:?Connection string required.}" | clip
+}
+
+rpaste-to() {
+  # Usage: rpaste-to USER@HOST
+  # convenience function: paste to a remote clipboard with rclip
+  clip | rclip "${1:?Connection string required.}"
+}
+
 ### META SHELL CHANGES
 # force emacs key bindings
 bindkey -e
