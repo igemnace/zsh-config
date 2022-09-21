@@ -162,6 +162,7 @@ alias gll='git log --oneline'
 alias glf='git log --oneline HEAD..@{u}'
 alias glp='git log --oneline @{u}..HEAD'
 alias grc='git rebase --continue'
+alias gcpc='git cherry-pick --continue'
 
 # misc aliases
 alias e='emacs -nw'
