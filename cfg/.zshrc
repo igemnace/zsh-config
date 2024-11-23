@@ -174,7 +174,7 @@ alias ls='ls --color=auto'
 alias lx=exa
 alias d=detach
 
-### SCRIPT SOURCING
-for file in "$HOME/.zsh"/*.zsh; do
+### SCRIPT AUTOSOURCING
+for file in "$HOME"/.config/zsh/autosource/*.zsh; do
   [[ -f $file ]] && source "$file"
 done

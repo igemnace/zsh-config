@@ -105,6 +105,17 @@ git_info() {
 }
 custom_prompt_git='$(git_info)'
 
+### JJ
+### prints git branch and status
+### but only if current dir is a jj repo
+jj_info() {
+  local status_lines=("${(@f)$(jj status --quiet 2>/dev/null)}")
+  if ! (( $? )); then
+    echo "%F{8}jj:%F{5}%B${branch}%b${combined_flags}%f"
+  fi
+}
+custom_prompt_jj='$(jj_info)'
+
 ### NODE
 ### prints node version
 ### but only if package.json exists in current directory
@@ -174,4 +185,4 @@ user_id() {
 }
 custom_prompt_id='$(user_id)'
 
-export PROMPT="${nl}${custom_prompt_id}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_node} ${custom_prompt_package}${custom_prompt_exit}${nl}${custom_prompt_jobs}${custom_prompt_suffix} %F{7}"
+export PROMPT="${nl}${custom_prompt_id}${custom_prompt_context} ${custom_prompt_git} ${custom_prompt_jj} ${custom_prompt_node} ${custom_prompt_package}${custom_prompt_exit}${nl}${custom_prompt_jobs}${custom_prompt_suffix} %F{7}"
