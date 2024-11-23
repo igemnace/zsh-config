@@ -1,3 +1,5 @@
+lib="$HOME/.config/zsh/lib"
+
 ### USER + HOST
 ### only if logged in through ssh
 pr_in_ssh() {
@@ -47,78 +49,17 @@ pr_pwd() {
 }
 
 # GIT
-# TODO: overhaul and move to lib
 # prints git branch and status
 # but only if current dir is a git repo
 pr_git() {
-	local status_output
-	status_output=$(git status -b --porcelain 2>/dev/null)
+	# only run in git repos
+	git status --short &>/dev/null || return
 
-	# if git status fails, short circuit immediately
-	(( $? )) && return
+	# source lib/git.zsh if necessary
+	command -v git_prompt &>/dev/null || source "$lib/git.zsh"
 
-	local first_line rest_lines
-	first_line=$(head -n 1 <<< "$status_output")
-	rest_lines=$(tail -n +2 <<< "$status_output")
-
-	# first line of status_output contains branch name and ahead/behind info
-	# possible formats are:
-	# ## branch
-	# ## branch...upstream
-	# ## branch...upstream [ahead n]
-	# ## branch...upstream [behind n]
-	# ## branch...upstream [ahead m, behind n]
-	local branch temp ahead behind
-
-	# branch is simple: just remove the leading ##, then remove ... onwards
-	# works even in the simple case: ## branch
-	# since there's no ... to remove -- the branch is already isolated as is
-	temp="${first_line#\#\# }"
-	branch="${temp%...*}"
-
-	# parse out ahead/behind status
-	if [[ $first_line =~ 'ahead|behind' ]]; then
-		temp="${first_line#*\[}"
-		temp="${temp%]}"
-		# by this point, ahead/behind status should be isolated, e.g.
-		# ahead m, behind n
-		local key value
-		while read -rd , key value; do
-			case $key in
-				ahead) ahead="$value";;
-				behind) behind="$value";;
-			esac
-		done <<< "$temp,"
-	fi
-
-	# format ahead/behind flags
-	local ahead_flag
-	local behind_flag
-	(( $ahead )) && ahead_flag="%F{6}+${ahead}%f"
-	(( $behind )) && behind_flag="%F{1}-${behind}%f"
-
-	# rest of status_output contain info on dirty files
-	local unstaged staged untracked
-	unstaged=$(cut -c 2 <<< "$rest_lines" | tr -d ' \n?')
-	staged=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n?')
-	untracked=$(cut -c 1 <<< "$rest_lines" | tr -d ' \n')
-
-	# combine dirty file info into a single track flag
-	local track_flag
-	[[ -n $staged ]] && track_flag+="+"
-	[[ -n $unstaged ]] && track_flag+="!"
-	[[ $untracked == *\?* ]] && track_flag+="?"
-	[[ -n $track_flag ]] && track_flag="%F{3}${track_flag}%f"
-
-	# git stash list contains stash info
-	local stash_flag
-	[[ -n $(git stash list) ]] && stash_flag="%F{2}s%f"
-
-	# combine all flags
-	local combined_flags="${track_flag}${stash_flag}${ahead_flag}${behind_flag}"
-	[[ -n $combined_flags ]] && combined_flags="%F{8}[%B${combined_flags}%b%F{8}]"
-
-	echo " %F{8}git:%F{5}%B${branch}%b${combined_flags}%f"
+	# make use of git_prompt, with a light wrapper
+	echo " %F{8}git:$(git_prompt)%f"
 }
 
 # JJ
