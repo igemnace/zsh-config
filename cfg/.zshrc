@@ -21,6 +21,10 @@ ixio() {
   tail -n +1 -- "$@" | curl -F 'f:1=<-' http://ix.io/
 }
 
+0x0() {
+  tail -n +1 -- "$@" | curl -F 'file=@-' https://0x0.st/
+}
+
 elimage() {
   curlargs=()
   for arg; do
