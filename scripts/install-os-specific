@@ -2,7 +2,7 @@
 
 # helper function to install config
 install () {
-	[[ -d "$PWD/os-specific/$1" ]] && cp -faTs "$PWD/os-specific/$1" "$HOME/.config/zsh"
+	[[ -d "$PWD/os-specific/$1" ]] && cp -faTs "$PWD/os-specific/$1" "$HOME"
 }
 
 # detect OS and symlink
