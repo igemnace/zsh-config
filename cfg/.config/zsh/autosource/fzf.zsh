@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 ### OPTIONS
 # use fd instead of find to populate files
 export FZF_DEFAULT_COMMAND='fd --hidden --type f --type l --exclude ".git"'
