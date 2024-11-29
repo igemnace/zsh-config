@@ -18,7 +18,5 @@ manz() {
 }
 
 # source fzf completion
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
 bindkey -r '\ec'
 bindkey '^T' gosmacs-transpose-chars

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# helper function to symlink into autosource
+autosource () {
+	file="$1"
+	# use -f so we can idempotently run during updates
+	ln -sf "$PWD/os-specific/$file" "$HOME/.config/zsh/autosource/50-$file"
+}
+
+# detect OS and symlink
+case "$OSTYPE" in
+	darwin*) autosource macos.zsh;;
+esac
+
+# detect distro and symlink
+[[ "$OSTYPE" = linux* ]] || exit
+[[ -e /etc/os-release ]] || exit
+# dumb-parse /etc/os-release ourselves, to avoid sourcing
+IFS== read -r _ id < <(grep ^ID= /etc/os-release)
+case "$id" in
+	arch) autosource arch.zsh;;
+esac

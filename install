@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-cp -faTs "$PWD/cfg" "$HOME"
+./scripts/install-cfg
+./scripts/install-os-specific
