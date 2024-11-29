@@ -1,0 +1,3 @@
+#compdef reaur
+
+_files -W "${AUR_DIR:-$HOME/Downloads/AUR}"
