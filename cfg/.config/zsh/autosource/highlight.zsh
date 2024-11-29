@@ -74,7 +74,6 @@ pr_jj() {
 }
 
 # NODE
-# TODO: overhaul and move to lib
 # prints node version
 # but only if package.json exists in current directory
 pr_node() {
@@ -95,7 +94,6 @@ pr_node() {
 }
 
 # NODE PACKAGE
-# TODO: overhaul and move to lib
 # prints node package version
 # extracted from package.json in current directory
 pr_nodepkg() {
