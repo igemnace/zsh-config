@@ -5,22 +5,19 @@ Easy way to transfer my ZSH configuration across multiple machines.
 ## Pre-Installation
 
 Make sure that your machine satisfies the following:
-- Is using GNU/Linux (scripts are untested on other UNIX systems and will
-  flat-out fail on Windows)
 - Has ZSH
-- Has no pre-existing `.zshrc`, `.zprofile`, and `.zsh` (backup and remove if
-  existing)
-- Has env, bash, and git (required by install scripts)
-
-To make use of the optional fzf integration, you must also have installed fzf.
-See [the GitHub page](https://github.com/junegunn/fzf) for instructions.
+- Has no pre-existing `.zshrc` and `.zprofile` (backup and remove if existing)
+- Has env, bash, git, and GNU cp (required by install scripts)
 
 ## Installation
 
 Just run `./install` from the repository's root directory. This will
 automatically do the following:
-- Symlink `.zshrc` into your home directory (`install-zshrc`)
-- Symlink all of the contents of `.zsh` into your home directory (`install-zsh`)
+- Symlink all of the contents of `cfg` into your home directory (`install-cfg`)
+- Detect OS and symlink matching contents of `os-specific` into your home
+  directory (`install-os-specific`)
+- Symlink all of the contents of `machine-specific` (if existing) into your home
+  directory (`install-machine-specific`)
 
 ## Licensing
 
