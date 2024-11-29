@@ -14,7 +14,9 @@ export NNN_OPTS=Ce
 # control firefox behavior
 export MOZ_USE_XINPUT2=1
 
-# auto-start X when running on virtual tty 1
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
+### ENV AUTOSOURCING
+if [[ -d "$HOME/.config/zsh/env" ]]; then
+  for file in "$HOME"/.config/zsh/env/*.zsh; do
+    [[ -e $file ]] && source "$file"
+  done
 fi

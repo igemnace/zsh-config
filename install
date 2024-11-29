@@ -2,3 +2,4 @@
 
 ./scripts/install-cfg
 ./scripts/install-os-specific
+./scripts/install-site-local
