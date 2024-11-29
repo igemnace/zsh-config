@@ -1,0 +1,3 @@
+#compdef nhload
+
+_files -W "${NETHACKLOAD_DIR:-$HOME/Games/nethack/load}"
