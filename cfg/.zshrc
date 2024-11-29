@@ -10,7 +10,7 @@ binedit() {
   for arg; do
     files+=("$(command -v "$arg")")
   done
-  vim "${files[@]}"
+  "${VISUAL:-${EDITOR:-vim}}" "${files[@]}"
 }
 
 sprunge() {
@@ -38,15 +38,15 @@ serveo() {
 }
 
 vg() {
-  vim +copen -q <(rg --vimgrep --column --no-heading "${@:?No pattern provided.}")
+  "${VISUAL:-${EDITOR:-vim}}" +copen -q <(rg --vimgrep --column --no-heading "${@:?No pattern provided.}")
 }
 
 vs() {
-  vim +Git +'wincmd o'
+  "${VISUAL:-${EDITOR:-vim}}" +Git +'wincmd o'
 }
 
 vm() {
-  vim +'Git mergetool'
+  "${VISUAL:-${EDITOR:-vim}}" +'Git mergetool'
 }
 
 cdh() {
@@ -58,7 +58,7 @@ detach() {
 }
 
 :h() {
-  vim +"h $*" +only
+  "${VISUAL:-${EDITOR:-vim}}" +"h $*" +only
 }
 
 n3() {
