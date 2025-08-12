@@ -13,7 +13,7 @@ aurdeps() {
 reaur() {
   # TODO: batch all the PKGBUILD inspection together
   for package in "$@"; do
-    aurupdate "$package" && aurinstall "$package"
+    aurupdate "$package" && aurinstall --inspect-updates "$package"
   done
 }
 
