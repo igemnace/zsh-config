@@ -1,3 +1,6 @@
+# source zsh scripts installed from pacman
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # aur convenience functions
 aur() {
   aurget "$@" && aurinstall "$@"

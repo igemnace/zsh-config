@@ -1,3 +1,11 @@
+### SOURCE CONFIG
+# source directly from fzf
+command -v fzf &>/dev/null && source <(fzf --zsh)
+
+# reconfigure keybinds: i only want C-r
+bindkey -r '\ec'
+bindkey '^T' gosmacs-transpose-chars
+
 ### OPTIONS
 # use fd instead of find to populate files
 export FZF_DEFAULT_COMMAND='fd --hidden --type f --type l --exclude ".git"'
@@ -16,7 +24,3 @@ manz() {
     awk -v FS='[() ]' '{print $3, $1}' |
     xargs man
 }
-
-# source fzf completion
-bindkey -r '\ec'
-bindkey '^T' gosmacs-transpose-chars
